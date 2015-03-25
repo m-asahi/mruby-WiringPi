@@ -2,7 +2,14 @@ mruby-WiringPi
 =========
 
 ## How to use
- - checkout mruby
+
+- Install [WiringPI](http://wiringpi.com) library:
+
+        git clone git://git.drogon.net/wiringPi
+        cd wiringPi
+        ./build
+
+- checkout mruby
 
 ```bash
 git clone https://github.com/mruby/mruby.git  # original mruby
@@ -10,20 +17,19 @@ git clone https://github.com/mruby/mruby.git  # original mruby
 git clone https://github.com/iij/mruby.git    # iij extended mruby (File, IO, Socket, ... extend)
 ```
 
-  - edit `build_config.rb`
+- edit `build_config.rb`
 
 ```ruby
 MRuby::Build.new do |conf|
 
-    # ... (snip) ...
-
-    conf.gem :git => 'https://github.com/akiray03/mruby-WiringPi.git'  # add this line
-    conf.gem :git => 'https://github.com/matsumoto-r/mruby-sleep.git'  # add this line
+  # ... (snip) ...
+  conf.gem :github => 'akiray03/mruby-WiringPi'  # add this line
+  conf.gem :github => 'matsumoto-r/mruby-sleep'  # add this line
 end
 ```
 
- - build `ruby ./minirake`
- - exec `sudo ./bin/mruby build/mrbgems/mruby-WiringPi/sample/sample.rb`
+- build `ruby ./minirake`
+- exec `sudo ./bin/mruby build/mrbgems/mruby-WiringPi/sample/sample.rb`
 
 ## Pin Mapping
 
@@ -105,5 +111,5 @@ lcd.lcd_puts "Hi, Raspberry Pi"
  - cross build support
 
 ## License
-This software is licensed under the same license terms of WiringPi (https://github.com/WiringPi/WiringPi).
+This software is licensed under the same license terms of [WiringPI](http://wiringpi.com).
 

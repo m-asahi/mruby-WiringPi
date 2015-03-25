@@ -28,6 +28,8 @@
 #  define	FALSE	(1==2)
 #endif
 
+
+
 mrb_value
 mrb_WiringPi_Setup(mrb_state *mrb, mrb_value self)
 {
@@ -55,17 +57,6 @@ mrb_WiringPi_SetupGpio(mrb_state *mrb, mrb_value self)
 {
   if (wiringPiSetupGpio() == -1) {
     mrb_raise(mrb, E_RUNTIME_ERROR, "WiringPiSetupGpio failed");
-    return mrb_nil_value();
-  }
-
-  return self;
-}
-
-mrb_value
-mrb_WiringPi_SetupPiFace(mrb_state *mrb, mrb_value self)
-{
-  if (wiringPiSetupPiFace() == -1) {
-    mrb_raise(mrb, E_RUNTIME_ERROR, "WiringPiSetupPiFacefailed");
     return mrb_nil_value();
   }
 
@@ -139,7 +130,7 @@ mrb_WiringPi_serialOpen(mrb_state *mrb, mrb_value self)
 {
   mrb_value device;
   mrb_int baud;
-  char *dev;
+  const char *dev;
   mrb_get_args(mrb, "Si", &device, &baud);
   dev = mrb_string_value_ptr(mrb, device);
   return mrb_fixnum_value(serialOpen(dev, baud));
@@ -160,7 +151,7 @@ mrb_WiringPi_serialPutchar(mrb_state *mrb, mrb_value self)
 {
   mrb_int fd;
   mrb_value str;
-  char *chr;
+  const char *chr;
   mrb_get_args(mrb, "iS", &fd, &str);
 
   chr = mrb_string_value_ptr(mrb, str);
@@ -174,7 +165,7 @@ mrb_WiringPi_serialPuts(mrb_state *mrb, mrb_value self)
 {
   mrb_int fd;
   mrb_value str;
-  char *chr;
+  const char *chr;
   mrb_get_args(mrb, "iS", &fd, &str);
 
   chr = mrb_string_value_ptr(mrb, str);
@@ -190,7 +181,7 @@ mrb_WiringPi_serialPrintf(mrb_state *mrb, mrb_value self)
   mrb_value *argv;
   mrb_int fd;
   mrb_value str;
-  char *chr;
+  const char *chr;
 
   mrb_get_args(mrb, "*", &argv, &argc);
   if (argc <= 1) {
@@ -202,7 +193,7 @@ mrb_WiringPi_serialPrintf(mrb_state *mrb, mrb_value self)
       return mrb_nil_value();
     }
     fd = mrb_fixnum(argv[0]);
-    str = mrb_str_format(mrb, argc - 2, argv + 2, argv[1]);
+    //str = mrb_str_format(mrb, argc - 2, argv + 2, argv[1]);
   }
 
   chr = mrb_string_value_ptr(mrb, str);
@@ -241,7 +232,6 @@ mrb_mruby_WiringPi_gem_init(mrb_state *mrb)
   mrb_define_class_method(mrb, wpi, "wiringPiSetup",       mrb_WiringPi_Setup,        ARGS_NONE());
   mrb_define_class_method(mrb, wpi, "wiringPiSetupSys",    mrb_WiringPi_SetupSys,     ARGS_NONE());
   mrb_define_class_method(mrb, wpi, "wiringPiSetupGpio",   mrb_WiringPi_SetupGpio,    ARGS_NONE());
-  mrb_define_class_method(mrb, wpi, "wiringPiSetupPiFace", mrb_WiringPi_SetupPiFace,  ARGS_NONE());
   mrb_define_class_method(mrb, wpi, "pinMode",             mrb_WiringPi_pinMode,      ARGS_REQ(2));
   mrb_define_class_method(mrb, wpi, "digitalWrite",        mrb_WiringPi_digitalWrite, ARGS_REQ(2));
   mrb_define_class_method(mrb, wpi, "digitalRead",         mrb_WiringPi_digitalRead,  ARGS_REQ(1));

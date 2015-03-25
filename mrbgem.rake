@@ -1,8 +1,11 @@
 MRuby::Gem::Specification.new('mruby-WiringPi') do |spec|
   spec.license = 'LGPL'
-  spec.authors = 'Akira Yumiyama <yumiyama.akira@gmail.com>'
-
-  spec.cc.include_paths << "#{spec.dir}/include" << "#{spec.dir}/wiringPi"
-
-  spec.objs << (Dir.glob("#{dir}/src/*.c") + Dir.glob("#{dir}/wiringPi/*.c")).map { |f| f.relative_path_from(dir).pathmap("#{build_dir}/%X.o") }
+  spec.authors = 'Akira Yumiyama <yumiyama.akira@gmail.com>, Paolo Bosetti <paolo.bosetti@unitn.it>, Matteo Ragni <matteo.ragni@unitn.it>'
+  spec.summary = 'GPIO library for Raspberry PI'
+  spec.version = 0.1
+  spec.description = spec.summary
+  
+  spec.cc.include_paths << "/usr/local/include"
+  spec.linker.library_paths << "/usr/local/lib"
+  spec.linker.libraries << 'wiringPi' << 'wiringPiDev'
 end
