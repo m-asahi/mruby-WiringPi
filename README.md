@@ -39,8 +39,8 @@ end
 
 ## Pin Mapping
 
-| wiringPi | GPIO (RasPi Pin#) | GPIO (Tinker Board Pin#)| Name   |
-|:--------:|:----:|:------:|
+| wiringPi | GPIO (RasPi Pin#) | GPIO (Tinker Board Pin#) | Name   |
+|:--------:|:----:|:----:|:------:|
 |      0   |  17  | 164 | GPIO 0 |
 |      1   |  18  | 184 | GPIO 1 |
 |      2   |  27  | 166 | GPIO 2 |
