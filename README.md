@@ -3,10 +3,16 @@ mruby-WiringPi
 
 ## How to use
 
-- Install [WiringPI](http://wiringpi.com) library:
+- Install [WiringPI](http://wiringpi.com) library (for Raspberry Pi):
 
         git clone git://git.drogon.net/wiringPi
         cd wiringPi
+        ./build
+
+- Install [gpio_lib_c](https://github.com/TinkerBoard/gpio_lib_c) (for Tinker Board):
+
+        git clone https://github.com/TinkerBoard/gpio_lib_c.git
+        cd gpio_lib_c
         ./build
 
 - checkout mruby
@@ -23,7 +29,7 @@ git clone https://github.com/iij/mruby.git    # iij extended mruby (File, IO, So
 MRuby::Build.new do |conf|
 
   # ... (snip) ...
-  conf.gem :github => 'akiray03/mruby-WiringPi'  # add this line
+  conf.gem :github => 'm-asahi/mruby-WiringPi'   # add this line
   conf.gem :github => 'matsumoto-r/mruby-sleep'  # add this line
 end
 ```
